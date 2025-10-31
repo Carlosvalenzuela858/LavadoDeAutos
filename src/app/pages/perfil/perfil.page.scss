@@ -1,0 +1,202 @@
+// Commit por Juan - Estilos de Perfil
+ion-header {
+  ion-toolbar {
+    --background: #2D3142;
+    --color: #ffffff;
+  }
+}
+
+.perfil-content {
+  --background: #F5F5F5;
+}
+
+.perfil-container {
+  padding-bottom: 30px;
+}
+
+.perfil-header {
+  background: linear-gradient(135deg, #3D4454 0%, #2D3142 100%);
+  padding: 40px 20px;
+  text-align: center;
+  color: #ffffff;
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    
+    ion-icon {
+      font-size: 50px;
+      color: #ffffff;
+    }
+  }
+  
+  .nombre-usuario {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+  }
+  
+  .email-usuario {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0;
+  }
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2D3142;
+  margin: 0 0 15px 0;
+  padding: 0 20px;
+}
+
+.info-section {
+  padding: 25px 0;
+  
+  .info-list {
+    background: transparent;
+    padding: 0 15px;
+    
+    .info-item {
+      --background: #ffffff;
+      --padding-start: 15px;
+      --padding-end: 15px;
+      --inner-padding-end: 0;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      
+      ion-icon {
+        color: #2D3142;
+        font-size: 24px;
+        margin-right: 15px;
+      }
+      
+      ion-label {
+        .label-title {
+          font-size: 12px;
+          color: #999;
+          margin: 0 0 5px 0;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        h3 {
+          font-size: 16px;
+          font-weight: 600;
+          color: #2D3142;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.vehiculos-section {
+  padding: 25px 0;
+  
+  .vehiculo-card {
+    margin: 0 15px 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    
+    ion-card-content {
+      padding: 15px;
+    }
+    
+    .vehiculo-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      
+      .vehiculo-icon {
+        font-size: 40px;
+        color: #2D3142;
+      }
+      
+      .vehiculo-details {
+        flex: 1;
+        
+        h4 {
+          font-size: 16px;
+          font-weight: 700;
+          color: #2D3142;
+          margin: 0 0 5px 0;
+        }
+        
+        .vehiculo-meta {
+          font-size: 14px;
+          color: #666;
+          margin: 0 0 5px 0;
+        }
+        
+        .vehiculo-placa {
+          font-size: 14px;
+          color: #999;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.stats-section {
+  padding: 25px 0;
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 15px;
+    
+    .stat-item {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      
+      ion-icon {
+        font-size: 32px;
+        color: #2D3142;
+        margin-bottom: 10px;
+      }
+      
+      .stat-value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #2D3142;
+        margin: 0 0 5px 0;
+      }
+      
+      .stat-label {
+        font-size: 12px;
+        color: #999;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.logout-section {
+  padding: 25px 20px;
+  
+  .logout-button {
+    --background: #DC3545;
+    --background-hover: #C82333;
+    --background-activated: #C82333;
+    --border-radius: 12px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+  }
+}

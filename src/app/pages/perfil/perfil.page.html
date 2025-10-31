@@ -1,13 +1,91 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+<!-- Commit por Juan - Template de Perfil -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="perfil-content">
+  <div class="perfil-container" *ngIf="usuario">
+    <!-- Header del perfil -->
+    <div class="perfil-header">
+      <div class="avatar">
+        <ion-icon name="person"></ion-icon>
+      </div>
+      <h2 class="nombre-usuario">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+      <p class="email-usuario">{{ usuario.email }}</p>
+    </div>
+
+    <!-- Información del usuario -->
+    <div class="info-section">
+      <h3 class="section-title">Información Personal</h3>
+      
+      <ion-list class="info-list">
+        <ion-item lines="none" class="info-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p class="label-title">Correo Electrónico</p>
+            <h3>{{ usuario.email }}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" class="info-item">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p class="label-title">Teléfono</p>
+            <h3>{{ usuario.telefono }}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Vehículos -->
+    <div class="vehiculos-section">
+      <h3 class="section-title">Mis Vehículos</h3>
+      
+      <ion-card *ngFor="let vehiculo of usuario.vehiculos" class="vehiculo-card">
+        <ion-card-content>
+          <div class="vehiculo-info">
+            <ion-icon name="car-sport" class="vehiculo-icon"></ion-icon>
+            <div class="vehiculo-details">
+              <h4>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h4>
+              <p class="vehiculo-meta">{{ vehiculo.anio }} • {{ vehiculo.color }}</p>
+              <p class="vehiculo-placa">Placa: {{ vehiculo.placa }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="stats-section">
+      <h3 class="section-title">Estadísticas</h3>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <ion-icon name="calendar"></ion-icon>
+          <p class="stat-value">{{ totalReservas }}</p>
+          <p class="stat-label">Total Reservas</p>
+        </div>
+        <div class="stat-item">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          <p class="stat-value">{{ reservasCompletadas }}</p>
+          <p class="stat-label">Completadas</p>
+        </div>
+        <div class="stat-item">
+          <ion-icon name="cash"></ion-icon>
+          <p class="stat-value">{{ totalGastado | number:'1.0-0' }} Gs</p>
+          <p class="stat-label">Gastado</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de cerrar sesión -->
+    <div class="logout-section">
+      <ion-button expand="block" class="logout-button" (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
