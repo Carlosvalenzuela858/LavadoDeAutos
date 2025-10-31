@@ -1,121 +1,74 @@
+<!-- Commit por María - Template de Home con búsqueda y lista de lavaderos -->
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Servicios</ion-title>
+    <ion-title>Buscar Lavaderos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- Header con bienvenida -->
-  <div class="header-section">
-    <h1 class="welcome-title">¡Hola, {{ currentUser?.nombre }}! 👋</h1>
-    <p class="welcome-subtitle">¿Qué servicio necesitas hoy?</p>
+<ion-content [fullscreen]="true" class="home-content">
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionChange)="onSearch()"
+      placeholder="Buscar lavaderos..."
+      [animated]="true"
+      class="custom-searchbar"
+    ></ion-searchbar>
   </div>
 
-  <!-- Filtros de categoría -->
-  <div class="category-filters">
-    <ion-chip 
-      [class.selected]="categoriaSeleccionada === 'todos'"
-      (click)="filtrarPorCategoria('todos')">
-      <ion-label>Todos</ion-label>
-    </ion-chip>
-    <ion-chip 
-      [class.selected]="categoriaSeleccionada === 'basico'"
-      (click)="filtrarPorCategoria('basico')">
-      <ion-label>Básico</ion-label>
-    </ion-chip>
-    <ion-chip 
-      [class.selected]="categoriaSeleccionada === 'premium'"
-      (click)="filtrarPorCategoria('premium')">
-      <ion-label>Premium</ion-label>
-    </ion-chip>
-    <ion-chip 
-      [class.selected]="categoriaSeleccionada === 'completo'"
-      (click)="filtrarPorCategoria('completo')">
-      <ion-label>Completo</ion-label>
-    </ion-chip>
+  <!-- Mapa -->
+  <div class="map-container" *ngIf="showMap">
+    <div #map class="map"></div>
   </div>
 
-  <!-- Lista de servicios -->
-  <div class="services-list">
-    <div class="service-card" *ngFor="let servicio of serviciosFiltrados">
-      <div class="service-header">
-        <div class="service-icon">{{ servicio.imagen }}</div>
-        <div class="service-info">
-          <h3 class="service-name">{{ servicio.nombre }}</h3>
-          <p class="service-description">{{ servicio.descripcion }}</p>
-          <div class="service-details">
-            <span class="service-duration">⏱️ {{ servicio.duracion }} min</span>
-          </div>
-        </div>
-      </div>
-      <div class="service-footer">
-        <span class="service-price">{{ formatearPrecio(servicio.precio) }}</span>
-        <ion-button 
-          class="btn-reserve"
-          (click)="abrirModalReserva(servicio)">
-          Reservar
-        </ion-button>
-      </div>
+  <!-- Lista de Lavaderos -->
+  <div class="lavaderos-list">
+    <h2 class="section-title">Lavaderos Disponibles</h2>
+    
+    <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
+    
+    <div *ngIf="!loading && lavaderos.length === 0" class="no-results">
+      <ion-icon name="search-outline"></ion-icon>
+      <p>No se encontraron lavaderos</p>
     </div>
-  </div>
-
-  <!-- Modal de Reserva -->
-  <ion-modal [isOpen]="showReservaModal" (didDismiss)="cerrarModalReserva()">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Reservar Servicio</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="cerrarModalReserva()">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content class="modal-content">
-        <div class="modal-service-info" *ngIf="servicioSeleccionado">
-          <div class="modal-icon">{{ servicioSeleccionado.imagen }}</div>
-          <h2>{{ servicioSeleccionado.nombre }}</h2>
-          <p class="modal-price">{{ formatearPrecio(servicioSeleccionado.precio) }}</p>
-        </div>
-
-        <div class="reservation-form">
-          <div class="form-group">
-            <ion-label class="form-label">Fecha</ion-label>
-            <ion-item lines="none" class="input-field">
-              <ion-input
-                type="date"
-                [(ngModel)]="fechaSeleccionada"
-                (ionChange)="onFechaChange()"
-                [min]="fechaSeleccionada"
-              ></ion-input>
-            </ion-item>
-          </div>
-
-          <div class="form-group">
-            <ion-label class="form-label">Horario</ion-label>
-            <div class="time-slots">
-              <div 
-                *ngFor="let horario of horariosDisponibles"
-                class="time-slot"
-                [class.selected]="horaSeleccionada === horario.hora"
-                [class.disabled]="!horario.disponible"
-                (click)="horario.disponible && seleccionarHora(horario.hora)">
-                {{ horario.hora }}
-              </div>
+    
+    <ion-card *ngFor="let lavadero of lavaderos" class="lavadero-card" (click)="verDetalle(lavadero)">
+      <ion-card-content>
+        <div class="card-header">
+          <div class="header-content">
+            <h3 class="lavadero-nombre">{{ lavadero.nombre }}</h3>
+            <div class="rating">
+              <ion-icon name="star" class="star-icon"></ion-icon>
+              <span>{{ lavadero.rating }}</span>
             </div>
           </div>
-
-          <ion-button
-            expand="block"
-            class="btn-primary confirm-button"
-            [disabled]="!horaSeleccionada"
-            (click)="confirmarReserva()">
-            Confirmar Reserva
-          </ion-button>
+          <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
         </div>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+        
+        <p class="lavadero-direccion">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ lavadero.direccion }}
+        </p>
+        
+        <p class="lavadero-horarios">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ lavadero.horarios }}
+        </p>
+        
+        <div class="servicios-tags">
+          <span class="service-tag" *ngFor="let servicio of lavadero.servicios.slice(0, 3)">
+            {{ servicio.nombre }}
+          </span>
+          <span class="service-tag more" *ngIf="lavadero.servicios.length > 3">
+            +{{ lavadero.servicios.length - 3 }}
+          </span>
+        </div>
+        
+        <div class="precio-desde">
+          Desde <strong>{{ getprecioMinimo(lavadero) | number:'1.0-0' }} Gs</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
