@@ -1,0 +1,177 @@
+// Commit por María - Estilos de Home
+ion-header {
+  ion-toolbar {
+    --background: #2D3142;
+    --color: #ffffff;
+  }
+}
+
+.home-content {
+  --background: #F5F5F5;
+}
+
+.search-container {
+  padding: 15px;
+  background: #ffffff;
+  
+  .custom-searchbar {
+    --background: #F5F5F5;
+    --border-radius: 15px;
+    --box-shadow: none;
+    --icon-color: #2D3142;
+    --placeholder-color: #999;
+  }
+}
+
+.map-container {
+  height: 250px;
+  margin: 0 15px 15px 15px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.lavaderos-list {
+  padding: 0 15px 20px;
+  
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2D3142;
+    margin: 15px 0;
+  }
+  
+  .loading-spinner {
+    display: block;
+    margin: 40px auto;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    
+    ion-icon {
+      font-size: 64px;
+      margin-bottom: 15px;
+    }
+    
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+
+.lavadero-card {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-card-content {
+    padding: 15px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    
+    .header-content {
+      flex: 1;
+      
+      .lavadero-nombre {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2D3142;
+        margin: 0 0 5px 0;
+      }
+      
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+        .star-icon {
+          color: #FFB800;
+          font-size: 16px;
+        }
+        
+        span {
+          font-size: 14px;
+          font-weight: 600;
+          color: #666;
+        }
+      }
+    }
+    
+    .arrow-icon {
+      color: #999;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+  }
+  
+  .lavadero-direccion,
+  .lavadero-horarios {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+    margin: 8px 0;
+    
+    ion-icon {
+      font-size: 18px;
+      color: #999;
+    }
+  }
+  
+  .servicios-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+    
+    .service-tag {
+      background: #E8F5FF;
+      color: #2D3142;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      
+      &.more {
+        background: #F5F5F5;
+        color: #666;
+      }
+    }
+  }
+  
+  .precio-desde {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #F0F0F0;
+    
+    strong {
+      color: #2D3142;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}
