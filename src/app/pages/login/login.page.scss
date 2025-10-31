@@ -1,0 +1,117 @@
+// Commit por Carlos - Estilos de la página de Login
+.login-content {
+  --background: #3D4454;
+}
+
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 50px;
+  
+  .logo-icon {
+    font-size: 80px;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+  
+  .app-title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  
+  .app-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.login-form {
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  .form-title {
+    color: #3D4454;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 30px 0;
+  }
+  
+  form {
+    .input-item {
+      --background: #F5F5F5;
+      --border-radius: 15px;
+      --padding-start: 15px;
+      --padding-end: 15px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      
+      ion-input {
+        --color: #3D4454;
+        --placeholder-color: #999;
+        font-size: 16px;
+      }
+    }
+    
+    .error-message {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff4444;
+      font-size: 14px;
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255, 68, 68, 0.1);
+      border-radius: 10px;
+      
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+    
+    .login-button {
+      --background: #2D3142;
+      --background-hover: #1f2331;
+      --background-activated: #1f2331;
+      --border-radius: 15px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: none;
+      margin-top: 20px;
+    }
+  }
+  
+  .test-users-info {
+    margin-top: 30px;
+    padding: 15px;
+    background: #F5F5F5;
+    border-radius: 15px;
+    
+    .info-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: #3D4454;
+    }
+    
+    .info-item {
+      font-size: 13px;
+      margin: 5px 0;
+      color: #666;
+    }
+  }
+}
