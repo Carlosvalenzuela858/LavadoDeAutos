@@ -1,0 +1,7 @@
+{
+  "name": "lavado-autos-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
