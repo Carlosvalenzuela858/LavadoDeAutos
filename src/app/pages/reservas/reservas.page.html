@@ -1,13 +1,111 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reservas</ion-title>
+<!-- Commit por Juan - Template de Reservas -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mis Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reservas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="reservas-content">
+  <!-- Segmentos para filtrar reservas -->
+  <div class="segment-container">
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()" mode="md">
+      <ion-segment-button value="activas">
+        <ion-label>Activas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completadas">
+        <ion-label>Completadas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Spinner de carga -->
+  <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
+
+  <!-- Lista de reservas activas -->
+  <div *ngIf="!loading && segment === 'activas'" class="reservas-list">
+    <div *ngIf="reservasActivas.length === 0" class="no-reservas">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <h3>No tienes reservas activas</h3>
+      <p>Busca un lavadero y agenda tu próxima visita</p>
+      <ion-button (click)="irAHome()">Buscar Lavaderos</ion-button>
+    </div>
+
+    <ion-card *ngFor="let reserva of reservasActivas" class="reserva-card">
+      <ion-card-content>
+        <div class="card-header">
+          <span class="estado-badge" [class]="getEstadoClass(reserva.estado)">
+            {{ getEstadoTexto(reserva.estado) }}
+          </span>
+          <ion-icon 
+            name="close-circle" 
+            class="cancel-icon"
+            (click)="cancelarReserva(reserva)"
+          ></ion-icon>
+        </div>
+
+        <h3 class="lavadero-nombre">{{ reserva.lavaderoNombre }}</h3>
+        <p class="servicio-nombre">{{ reserva.servicioNombre }}</p>
+        
+        <div class="reserva-info">
+          <div class="info-item">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ reserva.fecha | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ reserva.hora }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="car-outline"></ion-icon>
+            <span>{{ reserva.vehiculoInfo }}</span>
+          </div>
+        </div>
+
+        <div class="precio-total">
+          Total: <strong>{{ reserva.precioTotal | number:'1.0-0' }} Gs</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Lista de reservas completadas -->
+  <div *ngIf="!loading && segment === 'completadas'" class="reservas-list">
+    <div *ngIf="reservasCompletadas.length === 0" class="no-reservas">
+      <ion-icon name="checkmark-done-outline"></ion-icon>
+      <h3>No tienes reservas completadas</h3>
+    </div>
+
+    <ion-card *ngFor="let reserva of reservasCompletadas" class="reserva-card completada">
+      <ion-card-content>
+        <div class="card-header">
+          <span class="estado-badge completada">Completada</span>
+        </div>
+
+        <h3 class="lavadero-nombre">{{ reserva.lavaderoNombre }}</h3>
+        <p class="servicio-nombre">{{ reserva.servicioNombre }}</p>
+        
+        <div class="reserva-info">
+          <div class="info-item">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ reserva.fecha | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ reserva.hora }}</span>
+          </div>
+        </div>
+
+        <div class="precio-total">
+          Total: <strong>{{ reserva.precioTotal | number:'1.0-0' }} Gs</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Botón flotante para crear reserva -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!showNuevaReserva">
+    <ion-fab-button color="dark" (click)="abrirNuevaReserva()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
