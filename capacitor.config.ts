@@ -1,9 +1,10 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'lavado-autos-app',
-  webDir: 'www'
+  appId: 'com.lavadoautos.app',
+  appName: 'Lavado de Autos',
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;

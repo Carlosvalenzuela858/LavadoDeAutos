@@ -1,0 +1,21 @@
+// Commit por Juan - Estilos de Tabs
+.custom-tab-bar {
+  --background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: 60px;
+  
+  ion-tab-button {
+    --color: #999;
+    --color-selected: #2D3142;
+    
+    ion-icon {
+      font-size: 24px;
+    }
+    
+    ion-label {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+  }
+}
