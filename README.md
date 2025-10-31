@@ -159,5 +159,10 @@ Para usar la integración de Google Maps:
 Este proyecto es un prototipo educativo.
 
 ---
+<img width="469" height="917" alt="image" src="https://github.com/user-attachments/assets/2bae3619-e459-44b3-b4d8-771ab6f6d136" />
+<img width="466" height="898" alt="image" src="https://github.com/user-attachments/assets/c3d6c035-6f53-4abb-b566-0ee6c5590e97" />
+<img width="469" height="910" alt="image" src="https://github.com/user-attachments/assets/471fa60f-3f66-47cf-9070-71910d89b102" />
+<img width="473" height="907" alt="image" src="https://github.com/user-attachments/assets/b4db5842-7f46-4d33-86b5-f3d04df3f0bc" />
 
-Desarrollado por Carlos, María y Juan
+
+Desarrollado por Carlos, Mariza y Guillermo
