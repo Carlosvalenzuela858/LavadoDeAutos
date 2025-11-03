@@ -74,7 +74,7 @@ ionic serve
 7. feat: Configurar rutas con guards de autenticación
 8. fix: Corregir redirección después del login
 
-### María - Home y Búsqueda (9 commits)
+### Mariza - Home y Búsqueda (9 commits)
 1. feat: Crear modelos de Lavadero y Servicio
 2. feat: Implementar mock data de lavaderos de Asunción
 3. feat: Crear servicio de lavaderos con búsqueda
@@ -85,7 +85,7 @@ ionic serve
 8. style: Aplicar estilos personalizados a las tarjetas
 9. feat: Agregar tema global y colores de la app
 
-### Juan - Reservas y Perfil (10 commits)
+### Guillermo - Reservas y Perfil (10 commits)
 1. feat: Crear modelo de Reserva con estados
 2. feat: Implementar mock data de reservas
 3. feat: Crear servicio de gestión de reservas
