@@ -1,6 +1,5 @@
 import { Usuario, Lavadero, Servicio, Reserva } from '../models/interfaces';
 
-// Usuarios Mock
 export const USUARIOS_MOCK: Usuario[] = [
   {
     id: '1',

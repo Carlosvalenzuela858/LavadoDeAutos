@@ -1,4 +1,3 @@
-// Commit por Carlos - Mock data de usuarios para el sistema
 import { Usuario } from '../models/usuario.model';
 
 export const USUARIOS_MOCK: Usuario[] = [

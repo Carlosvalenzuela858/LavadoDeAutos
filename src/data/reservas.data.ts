@@ -1,4 +1,3 @@
-// Commit por Juan - Mock data de reservas
 import { Reserva, EstadoReserva } from '../models/reserva.model';
 
 export const RESERVAS_MOCK: Reserva[] = [
