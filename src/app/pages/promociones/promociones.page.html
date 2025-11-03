@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Promociones y Cupones</ion-title>
+  </ion-toolbar>
+  
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segmento" (ionChange)="cambiarSegmento($event)">
+      <ion-segment-button value="promociones">
+        <ion-label>Promociones</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="cupones">
+        <ion-label>Cupones</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- PROMOCIONES -->
+  <div *ngIf="segmento === 'promociones'" class="promociones-container">
+    <div class="section-header">
+      <h2>🎉 Ofertas Especiales</h2>
+      <p>Aprovecha estas increíbles promociones</p>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let promo of promociones" size="12" sizeMd="6" sizeLg="4">
+          <ion-card class="promo-card">
+            <img [src]="promo.imagen" />
+            <ion-badge class="descuento-badge" color="danger">
+              {{ promo.descuento }}% OFF
+            </ion-badge>
+            
+            <ion-card-header>
+              <ion-card-title>{{ promo.titulo }}</ion-card-title>
+              <ion-card-subtitle>{{ promo.descripcion }}</ion-card-subtitle>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <div class="promo-info">
+                <ion-chip color="warning">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-label>{{ getDiasRestantes(promo.fechaFin) }} días restantes</ion-label>
+                </ion-chip>
+              </div>
+              
+              <ion-button expand="block" (click)="aplicarPromocion(promo)">
+                Ver Detalles
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- CUPONES -->
+  <div *ngIf="segmento === 'cupones'" class="cupones-container">
+    <div class="section-header">
+      <h2>🎫 Cupones Disponibles</h2>
+      <p>Usa estos códigos en tu próxima reserva</p>
+    </div>
+
+    <!-- Validar Cupón -->
+    <ion-card class="validar-card">
+      <ion-card-header>
+        <ion-card-title>¿Tienes un código?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input
+            [(ngModel)]="codigoCupon"
+            placeholder="Ingresa tu código"
+            [clearInput]="true"
+          ></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="validarCupon()">
+          Validar Cupón
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de Cupones -->
+    <div *ngFor="let cupon of cupones" class="cupon-item">
+      <ion-card class="cupon-card">
+        <div class="cupon-header">
+          <ion-icon name="ticket-outline" class="ticket-icon"></ion-icon>
+          <div class="cupon-info">
+            <h3>{{ cupon.codigo }}</h3>
+            <p>{{ cupon.descripcion }}</p>
+          </div>
+          <ion-badge [color]="cupon.tipo === 'porcentaje' ? 'success' : 'primary'">
+            {{ cupon.tipo === 'porcentaje' ? cupon.valor + '%' : cupon.valor + ' Gs' }}
+          </ion-badge>
+        </div>
+        
+        <div class="cupon-details">
+          <div class="detail-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>Vence: {{ getDiasRestantes(cupon.fechaFin) }} días</span>
+          </div>
+          <div class="detail-item" *ngIf="cupon.minimoCompra">
+            <ion-icon name="card-outline"></ion-icon>
+            <span>Mínimo: {{ cupon.minimoCompra }} Gs</span>
+          </div>
+          <div class="detail-item" *ngIf="cupon.usosMaximos">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>{{ cupon.usosMaximos - cupon.usos }} usos disponibles</span>
+          </div>
+        </div>
+        
+        <ion-button expand="block" (click)="copiarCodigo(cupon.codigo)">
+          <ion-icon slot="start" name="copy-outline"></ion-icon>
+          Copiar Código
+        </ion-button>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-toast
+  [isOpen]="mostrarToast"
+  [message]="mensajeToast"
+  [duration]="2000"
+  [color]="colorToast"
+  (didDismiss)="mostrarToast = false"
+></ion-toast>

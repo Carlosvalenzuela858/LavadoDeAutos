@@ -1,190 +1,263 @@
-// Commit por Juan - Estilos de Reservas
+// Diseño Profesional - Reservas Page
 ion-header {
   ion-toolbar {
-    --background: #2D3142;
+    --background: linear-gradient(135deg, #2C3E50 0%, #3D4454 100%);
     --color: #ffffff;
+    --border-width: 0;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    
+    ion-title {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
   }
 }
 
 .reservas-content {
-  --background: #F5F5F5;
+  --background: #F8F9FA;
 }
 
 .segment-container {
-  padding: 15px;
-  background: #ffffff;
+  padding: 20px 16px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #F8F9FA 100%);
   
   ion-segment {
-    --background: #F5F5F5;
+    --background: #F5F7FA;
     border-radius: 12px;
     padding: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
     
     ion-segment-button {
-      --indicator-color: #2D3142;
-      --color: #999;
+      --indicator-color: transparent;
+      --indicator-box-shadow: none;
+      --color: #8E9AAF;
       --color-checked: #ffffff;
-      min-height: 36px;
+      min-height: 40px;
       font-weight: 600;
       font-size: 14px;
       text-transform: none;
       border-radius: 10px;
+      letter-spacing: 0.2px;
+      transition: all 0.3s ease;
+      
+      &::part(indicator-background) {
+        background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+        box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+      }
+      
+      &:hover {
+        --color: #5A6C7D;
+      }
     }
   }
 }
 
 .loading-spinner {
   display: block;
-  margin: 60px auto;
+  margin: 80px auto;
+  --color: #4A90E2;
 }
 
 .reservas-list {
-  padding: 15px;
+  padding: 0 16px 24px;
   
   .no-reservas {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 24px;
     
     ion-icon {
-      font-size: 80px;
-      color: #D0D0D0;
-      margin-bottom: 20px;
+      font-size: 96px;
+      color: #CBD5E0;
+      margin-bottom: 24px;
     }
     
     h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #2D3142;
-      margin: 0 0 10px 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #2C3E50;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.3px;
     }
     
     p {
-      font-size: 14px;
-      color: #999;
-      margin: 0 0 25px 0;
+      font-size: 15px;
+      color: #8E9AAF;
+      margin: 0 0 32px 0;
+      font-weight: 500;
+      line-height: 1.5;
     }
     
     ion-button {
-      --background: #2D3142;
-      --border-radius: 15px;
+      --background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      --border-radius: 12px;
+      --box-shadow: 0 4px 16px rgba(74, 144, 226, 0.3);
+      height: 48px;
       text-transform: none;
       font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.2px;
     }
   }
 }
 
 .reserva-card {
-  margin-bottom: 15px;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  transition: all 0.3s ease;
   
   &.completada {
-    opacity: 0.85;
+    opacity: 0.8;
+    border-color: rgba(76, 175, 80, 0.1);
+    background: linear-gradient(135deg, #ffffff 0%, #F1F8F4 100%);
+  }
+  
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
   
   ion-card-content {
-    padding: 15px;
+    padding: 20px;
   }
   
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     
     .estado-badge {
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 7px 16px;
+      border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      border: 1px solid;
       
       &.pendiente {
-        background: #FFF3CD;
-        color: #856404;
+        background: linear-gradient(135deg, #FFF4E6 0%, #FFE8CC 100%);
+        color: #E65100;
+        border-color: rgba(230, 81, 0, 0.2);
       }
       
       &.confirmada {
-        background: #D1ECF1;
-        color: #0C5460;
+        background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        color: #0D47A1;
+        border-color: rgba(13, 71, 161, 0.2);
       }
       
       &.en-proceso {
-        background: #CCE5FF;
-        color: #004085;
+        background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
+        color: #01579B;
+        border-color: rgba(1, 87, 155, 0.2);
       }
       
       &.completada {
-        background: #D4EDDA;
-        color: #155724;
+        background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        color: #1B5E20;
+        border-color: rgba(27, 94, 32, 0.2);
       }
       
       &.cancelada {
-        background: #F8D7DA;
-        color: #721C24;
+        background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+        color: #B71C1C;
+        border-color: rgba(183, 28, 28, 0.2);
       }
     }
     
     .cancel-icon {
-      font-size: 24px;
-      color: #DC3545;
+      font-size: 26px;
+      color: #E74C3C;
       cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 4px;
+      border-radius: 8px;
+      
+      &:hover {
+        background: rgba(231, 76, 60, 0.1);
+        color: #C0392B;
+      }
       
       &:active {
-        opacity: 0.7;
+        transform: scale(0.95);
       }
     }
   }
   
   .lavadero-nombre {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 700;
-    color: #2D3142;
-    margin: 0 0 5px 0;
+    color: #2C3E50;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.3px;
   }
   
   .servicio-nombre {
     font-size: 15px;
-    color: #666;
-    margin: 0 0 15px 0;
+    color: #5A6C7D;
+    margin: 0 0 18px 0;
+    font-weight: 500;
   }
   
   .reserva-info {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 18px;
     
     .info-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-size: 14px;
-      color: #666;
+      color: #5A6C7D;
+      font-weight: 500;
       
       ion-icon {
         font-size: 20px;
-        color: #999;
+        color: #8E9AAF;
+        flex-shrink: 0;
       }
     }
   }
   
   .precio-total {
-    padding-top: 12px;
-    border-top: 1px solid #F0F0F0;
+    padding-top: 16px;
+    border-top: 2px solid #E8ECEF;
     font-size: 14px;
-    color: #666;
+    color: #5A6C7D;
+    font-weight: 500;
     
     strong {
-      color: #2D3142;
-      font-size: 18px;
+      color: #2C3E50;
+      font-size: 20px;
       font-weight: 700;
+      letter-spacing: -0.5px;
     }
   }
 }
 
 ion-fab {
-  margin: 0 16px 16px 0;
+  margin: 0 20px 20px 0;
   
   ion-fab-button {
-    --background: #2D3142;
+    --background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    --box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+    --border-radius: 16px;
+    width: 60px;
+    height: 60px;
+    
+    &:hover {
+      --box-shadow: 0 8px 24px rgba(74, 144, 226, 0.5);
+    }
+    
+    ion-icon {
+      font-size: 28px;
+    }
   }
 }
