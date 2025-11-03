@@ -1,0 +1,222 @@
+// Diseño Profesional - Home Page
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #2C3E50 0%, #3D4454 100%);
+    --color: #ffffff;
+    --border-width: 0;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    
+    ion-title {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+  }
+}
+
+.home-content {
+  --background: #F8F9FA;
+}
+
+.search-container {
+  padding: 20px 16px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #F8F9FA 100%);
+  
+  .custom-searchbar {
+    --background: #ffffff;
+    --border-radius: 12px;
+    --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --icon-color: #4A90E2;
+    --placeholder-color: #8E9AAF;
+    --placeholder-font-weight: 500;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:focus-within {
+      --box-shadow: 0 4px 16px rgba(74, 144, 226, 0.15);
+      border-color: #4A90E2;
+    }
+  }
+}
+
+.map-container {
+  height: 280px;
+  margin: 0 16px 20px 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.lavaderos-list {
+  padding: 0 16px 24px;
+  
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2C3E50;
+    margin: 8px 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+  
+  .loading-spinner {
+    display: block;
+    margin: 60px auto;
+    --color: #4A90E2;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    
+    ion-icon {
+      font-size: 72px;
+      color: #CBD5E0;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      font-size: 16px;
+      margin: 0;
+      color: #8E9AAF;
+      font-weight: 500;
+    }
+  }
+}
+
+.lavadero-card {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  background: #ffffff;
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  ion-card-content {
+    padding: 20px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    
+    .header-content {
+      flex: 1;
+      
+      .lavadero-nombre {
+        font-size: 19px;
+        font-weight: 700;
+        color: #2C3E50;
+        margin: 0 0 8px 0;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+      }
+      
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        
+        .star-icon {
+          color: #FFA726;
+          font-size: 16px;
+        }
+        
+        span {
+          font-size: 14px;
+          font-weight: 700;
+          color: #2C3E50;
+        }
+      }
+    }
+    
+    .arrow-icon {
+      color: #CBD5E0;
+      font-size: 22px;
+      margin-top: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    &:hover .arrow-icon {
+      color: #4A90E2;
+      transform: translateX(3px);
+    }
+  }
+  
+  .lavadero-direccion,
+  .lavadero-horarios {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #5A6C7D;
+    margin: 10px 0;
+    font-weight: 500;
+    
+    ion-icon {
+      font-size: 18px;
+      color: #8E9AAF;
+      flex-shrink: 0;
+    }
+  }
+  
+  .servicios-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    
+    .service-tag {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      color: #1976D2;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      border: 1px solid rgba(25, 118, 210, 0.1);
+      
+      &.more {
+        background: #F5F7FA;
+        color: #5A6C7D;
+        border-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+  
+  .precio-desde {
+    font-size: 14px;
+    color: #5A6C7D;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #E8ECEF;
+    font-weight: 500;
+    
+    strong {
+      color: #2C3E50;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+  }
+}

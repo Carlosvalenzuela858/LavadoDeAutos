@@ -1,0 +1,49 @@
+// Diseño Profesional - Tabs
+.custom-tab-bar {
+  --background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  height: 64px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  
+  ion-tab-button {
+    --color: #8E9AAF;
+    --color-selected: #4A90E2;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    transition: all 0.3s ease;
+    
+    &::part(native) {
+      transition: all 0.3s ease;
+    }
+    
+    &:hover {
+      --color: #5A6C7D;
+    }
+    
+    &.tab-selected {
+      --color: #4A90E2;
+      
+      ion-icon {
+        transform: scale(1.1);
+      }
+      
+      ion-label {
+        font-weight: 700;
+      }
+    }
+    
+    ion-icon {
+      font-size: 26px;
+      margin-bottom: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    ion-label {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      transition: all 0.3s ease;
+    }
+  }
+}

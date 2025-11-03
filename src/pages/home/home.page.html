@@ -1,0 +1,74 @@
+<!-- Commit por María - Template de Home con búsqueda y lista de lavaderos -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Buscar Lavaderos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-content">
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionChange)="onSearch()"
+      placeholder="Buscar lavaderos..."
+      [animated]="true"
+      class="custom-searchbar"
+    ></ion-searchbar>
+  </div>
+
+  <!-- Mapa -->
+  <div class="map-container" *ngIf="showMap">
+    <div #map class="map"></div>
+  </div>
+
+  <!-- Lista de Lavaderos -->
+  <div class="lavaderos-list">
+    <h2 class="section-title">Lavaderos Disponibles</h2>
+    
+    <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
+    
+    <div *ngIf="!loading && lavaderos.length === 0" class="no-results">
+      <ion-icon name="search-outline"></ion-icon>
+      <p>No se encontraron lavaderos</p>
+    </div>
+    
+    <ion-card *ngFor="let lavadero of lavaderos" class="lavadero-card" (click)="verDetalle(lavadero)">
+      <ion-card-content>
+        <div class="card-header">
+          <div class="header-content">
+            <h3 class="lavadero-nombre">{{ lavadero.nombre }}</h3>
+            <div class="rating">
+              <ion-icon name="star" class="star-icon"></ion-icon>
+              <span>{{ lavadero.rating }}</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+        </div>
+        
+        <p class="lavadero-direccion">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ lavadero.direccion }}
+        </p>
+        
+        <p class="lavadero-horarios">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ lavadero.horarios }}
+        </p>
+        
+        <div class="servicios-tags">
+          <span class="service-tag" *ngFor="let servicio of lavadero.servicios.slice(0, 3)">
+            {{ servicio.nombre }}
+          </span>
+          <span class="service-tag more" *ngIf="lavadero.servicios.length > 3">
+            +{{ lavadero.servicios.length - 3 }}
+          </span>
+        </div>
+        
+        <div class="precio-desde">
+          Desde <strong>{{ getprecioMinimo(lavadero) | number:'1.0-0' }} Gs</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

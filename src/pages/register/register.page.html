@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="register-content">
+  <div class="register-container">
+    <div class="illustration-section">
+      <div class="register-icon">👤</div>
+      <h2 class="register-title">Únete a nosotros</h2>
+      <p class="register-subtitle">Crea tu cuenta y empieza a disfrutar</p>
+    </div>
+
+    <div class="form-section">
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="nombre"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="text"
+          placeholder="Apellido"
+          [(ngModel)]="apellido"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          autocomplete="email"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="tel"
+          placeholder="Teléfono"
+          [(ngModel)]="telefono"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          autocomplete="new-password"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field" lines="none">
+        <ion-input
+          type="password"
+          placeholder="Confirmar Contraseña"
+          [(ngModel)]="confirmPassword"
+          autocomplete="new-password"
+        ></ion-input>
+      </ion-item>
+
+      <ion-text color="danger" *ngIf="errorMessage">
+        <p class="error-message">{{ errorMessage }}</p>
+      </ion-text>
+
+      <ion-button
+        expand="block"
+        class="btn-primary register-button"
+        (click)="register()"
+      >
+        Crear Cuenta
+      </ion-button>
+
+      <div class="login-section">
+        <p class="login-text">
+          ¿Ya tienes cuenta?
+          <span class="login-link" (click)="goToLogin()">
+            Inicia sesión
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</ion-content>
