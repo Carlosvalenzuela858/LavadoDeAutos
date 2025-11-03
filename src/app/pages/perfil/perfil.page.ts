@@ -17,6 +17,7 @@ import {
   AlertController
 } from '@ionic/angular/standalone';
 import { Usuario } from '../../models/usuario.model';
+import { Reserva, EstadoReserva } from '../../models/reserva.model'; // ✅ IMPORTACIÓN CORRECTA
 import { AuthService } from '../../services/auth.service';
 import { ReservasService } from '../../services/reservas.service';
 import { addIcons } from 'ionicons';
@@ -55,7 +56,7 @@ export class PerfilPage implements OnInit {
   usuario: Usuario | null = null;
   totalReservas: number = 0;
   reservasCompletadas: number = 0;
-  totalGastado: number = 0;
+  totalGastado: number = 0; // ✅ cambio de ingresosTotales → totalGastado (más coherente)
 
   constructor(
     private authService: AuthService,
@@ -95,14 +96,22 @@ export class PerfilPage implements OnInit {
   loadEstadisticas() {
     if (!this.usuario) return;
 
-    this.reservasService.getReservasByUsuario(this.usuario.id).subscribe({
-      next: (reservas) => {
+this.reservasService.getReservasPorUsuario(this.usuario.id.toString()).subscribe({
+      next: (reservas: Reserva[]) => {
+        // Total de reservas del usuario
         this.totalReservas = reservas.length;
-        this.reservasCompletadas = reservas.filter(r => r.estado === 'completada').length;
+
+        // Reservas completadas
+        this.reservasCompletadas = reservas.filter(
+          (r: Reserva) => r.estado === EstadoReserva.COMPLETADA
+        ).length;
+
+        // Total gastado
         this.totalGastado = reservas
-          .filter(r => r.estado === 'completada')
-          .reduce((sum, r) => sum + r.precioTotal, 0);
-      }
+          .filter((r: Reserva) => r.estado === EstadoReserva.COMPLETADA)
+          .reduce((sum: number, r: Reserva) => sum + r.precioTotal, 0);
+      },
+      error: (err) => console.error('Error al cargar reservas', err)
     });
   }
 

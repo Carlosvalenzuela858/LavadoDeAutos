@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="chat-header">
+        <ion-avatar>
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <div class="header-info">
+          <h3>{{ lavaderoNombre }}</h3>
+          <p>En línea</p>
+        </div>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content class="ion-padding">
+  <div class="messages-container">
+    <div *ngFor="let mensaje of mensajes" 
+         [class]="'message ' + (mensaje.tipo === 'usuario' ? 'sent' : 'received')">
+      
+      <ion-avatar *ngIf="mensaje.tipo === 'lavadero'" class="message-avatar">
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+
+      <div class="message-content">
+        <div class="message-bubble">
+          <p>{{ mensaje.contenido }}</p>
+          <div class="message-time">
+            {{ getHoraFormateada(mensaje.fecha) }}
+            <ion-icon *ngIf="mensaje.tipo === 'usuario' && mensaje.leido" 
+                      name="checkmark-done-outline" 
+                      class="read-icon"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <ion-avatar *ngIf="mensaje.tipo === 'usuario'" class="message-avatar">
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="loading-container">
+    <p>Cargando mensajes...</p>
+  </div>
+
+  <div *ngIf="mensajes.length === 0 && !cargando" class="empty-state">
+    <ion-icon name="chatbubbles-outline"></ion-icon>
+    <h3>Sin mensajes aún</h3>
+    <p>Envía un mensaje para iniciar la conversación</p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="input-container">
+      
+      <ion-textarea
+        [(ngModel)]="nuevoMensaje"
+        placeholder="Escribe un mensaje..."
+        [autoGrow]="true"
+        [rows]="1"
+        (keyup.enter)="enviarMensaje()"
+      ></ion-textarea>
+      
+      <ion-button 
+        [disabled]="!nuevoMensaje.trim()"
+        (click)="enviarMensaje()"
+        fill="solid"
+        shape="round"
+        class="send-button">
+        <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

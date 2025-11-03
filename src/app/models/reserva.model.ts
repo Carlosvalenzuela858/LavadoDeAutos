@@ -1,10 +1,16 @@
-// Commit por Juan - Definición del modelo Reserva
+export enum EstadoReserva {
+  PENDIENTE = 'pendiente',
+  CONFIRMADA = 'confirmada',
+  COMPLETADA = 'completada',
+  CANCELADA = 'cancelada'
+}
+
 export interface Reserva {
-  id: number;
-  usuarioId: number;
-  lavaderoId: number;
-  servicioId: number;
-  vehiculoId: number;
+  id: string;
+  usuarioId: string;
+  lavaderoId: string;
+  servicioId: string;
+  vehiculoId: string;
   fecha: string;
   hora: string;
   estado: EstadoReserva;
@@ -12,12 +18,4 @@ export interface Reserva {
   lavaderoNombre?: string;
   servicioNombre?: string;
   vehiculoInfo?: string;
-}
-
-export enum EstadoReserva {
-  PENDIENTE = 'pendiente',
-  CONFIRMADA = 'confirmada',
-  EN_PROCESO = 'en_proceso',
-  COMPLETADA = 'completada',
-  CANCELADA = 'cancelada'
 }

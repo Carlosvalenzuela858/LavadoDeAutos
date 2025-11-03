@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notificaciones</ion-title>
+    <ion-button slot="end" fill="clear" (click)="marcarTodasLeidas()">
+      <ion-icon name="checkmark-done"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+  
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="filtro" (ionChange)="cambiarFiltro($event)">
+      <ion-segment-button value="todas">
+        <ion-label>Todas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="noLeidas">
+        <ion-label>No leídas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="notificaciones.length > 0">
+    <ion-item-sliding *ngFor="let notif of notificaciones">
+      <ion-item 
+        [class.no-leida]="!notif.leida"
+        button
+        (click)="marcarLeida(notif)">
+        
+        <ion-icon 
+          [name]="getIcono(notif.tipo)" 
+          [color]="getColor(notif.tipo)"
+          slot="start">
+        </ion-icon>
+        
+        <ion-label>
+          <h2>{{ notif.titulo }}</h2>
+          <p>{{ notif.mensaje }}</p>
+          <p class="time">{{ getTiempoTranscurrido(notif.fecha) }}</p>
+        </ion-label>
+        
+        <ion-badge *ngIf="!notif.leida" color="primary" slot="end">
+          Nuevo
+        </ion-badge>
+      </ion-item>
+      
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminar(notif.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div *ngIf="notificaciones.length === 0" class="empty-state">
+    <ion-icon name="notifications-outline"></ion-icon>
+    <h3>Sin notificaciones</h3>
+    <p>No tienes notificaciones {{ filtro === 'noLeidas' ? 'sin leer' : '' }}</p>
+  </div>
+</ion-content>

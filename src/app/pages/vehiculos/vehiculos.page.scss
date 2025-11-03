@@ -1,0 +1,86 @@
+.vehiculos-container {
+  padding: 16px;
+}
+
+.vehiculo-card {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    .vehiculo-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .tipo-icon {
+        font-size: 32px;
+      }
+
+      ion-card-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .detalles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .notas {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 12px 0;
+    font-style: italic;
+  }
+
+  .acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 32px;
+  text-align: center;
+  min-height: 400px;
+
+  ion-icon {
+    font-size: 80px;
+    color: #D1D5DB;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F2937;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #6B7280;
+  }
+}

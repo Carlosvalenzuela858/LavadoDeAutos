@@ -1,22 +1,30 @@
 export interface Servicio {
-  id: number;             // ✅ número, no string
+  id: string;
   nombre: string;
   descripcion: string;
   precio: number;
   duracion: number;
   imagen: string;
-  categoria: string;      // ✅ agregar esta propiedad
+  categoria: string;
+}
+
+export enum EstadoReserva {
+  PENDIENTE = 'pendiente',
+  CONFIRMADA = 'confirmada',
+  CANCELADA = 'cancelada'
 }
 
 export interface Reserva {
-  id: number;             // ✅ número, no string
-  usuarioId: number;
-  servicioId: number;
+  id: string;
+  usuarioId: string;
+  lavaderoId: string;
+  servicioId: string;
+  vehiculoId: string;
   fecha: string;
   hora: string;
-  estado: string;
+  estado: EstadoReserva;
+  precioTotal: number;
 }
-
 export interface HorarioDisponible {
   hora: string;
   disponible: boolean;

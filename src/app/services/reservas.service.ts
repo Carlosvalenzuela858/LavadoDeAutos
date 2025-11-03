@@ -1,6 +1,5 @@
-// Commit por Juan - Servicio de gestión de reservas
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Reserva, EstadoReserva } from '../models/reserva.model';
 import { RESERVAS_MOCK } from '../data/reservas.data';
@@ -9,58 +8,62 @@ import { RESERVAS_MOCK } from '../data/reservas.data';
   providedIn: 'root'
 })
 export class ReservasService {
-  private reservas = [...RESERVAS_MOCK];
-  private reservasSubject = new BehaviorSubject<Reserva[]>(this.reservas);
+  private reservas: Reserva[] = [...RESERVAS_MOCK];
 
-  constructor() { }
+  constructor() {}
 
-  getReservasByUsuario(usuarioId: number): Observable<Reserva[]> {
-    const reservasUsuario = this.reservas.filter(r => r.usuarioId === usuarioId);
-    return of(reservasUsuario).pipe(delay(300));
+  // 🔹 Devuelve todas las reservas
+  getReservas() {
+    return of(this.reservas).pipe(delay(300));
   }
 
-  getReservaById(id: number): Observable<Reserva | undefined> {
+  // 🔹 Devuelve reservas de un usuario (usuarioId string)
+  getReservasPorUsuario(usuarioId: string) {
+    const reservasUsuario = this.reservas.filter(r => r.usuarioId === usuarioId);
+    return of(reservasUsuario).pipe(delay(200));
+  }
+
+  // 🔹 Devuelve una reserva por id (string)
+  getReservaPorId(id: string) {
     return of(this.reservas.find(r => r.id === id)).pipe(delay(200));
   }
 
-  crearReserva(reserva: Omit<Reserva, 'id'>): Observable<Reserva> {
+  // 🔹 Crea una nueva reserva
+  crearReserva(reserva: Omit<Reserva, 'id' | 'estado'>) {
     const nuevaReserva: Reserva = {
       ...reserva,
-      id: this.getNextId(),
-      estado: EstadoReserva.PENDIENTE
+      id: this.getNextId().toString(), // ✅ id como string
+      estado: EstadoReserva.CONFIRMADA
     };
     this.reservas.push(nuevaReserva);
-    this.reservasSubject.next(this.reservas);
-    return of(nuevaReserva).pipe(delay(500));
+    return of(nuevaReserva).pipe(delay(200));
   }
 
-  cancelarReserva(id: number): Observable<boolean> {
+  // 🔹 Cancela una reserva
+  cancelarReserva(id: string) {
     const reserva = this.reservas.find(r => r.id === id);
     if (reserva) {
       reserva.estado = EstadoReserva.CANCELADA;
-      this.reservasSubject.next(this.reservas);
-      return of(true).pipe(delay(300));
     }
-    return of(false).pipe(delay(300));
+    return of(reserva).pipe(delay(200));
   }
 
-  getReservasPendientes(usuarioId: number): Observable<Reserva[]> {
-    const pendientes = this.reservas.filter(r => 
-      r.usuarioId === usuarioId && 
-      (r.estado === EstadoReserva.PENDIENTE || r.estado === EstadoReserva.CONFIRMADA)
+  // 🔹 Verifica si ya existe una reserva para un usuario en el mismo horario
+  existeReserva(usuarioId: string, fecha: string, hora: string) {
+    return this.reservas.some(
+      r =>
+        r.usuarioId === usuarioId &&
+        r.fecha === fecha &&
+        r.hora === hora &&
+        r.estado !== EstadoReserva.CANCELADA
     );
-    return of(pendientes).pipe(delay(200));
   }
 
-  getReservasCompletadas(usuarioId: number): Observable<Reserva[]> {
-    const completadas = this.reservas.filter(r => 
-      r.usuarioId === usuarioId && 
-      r.estado === EstadoReserva.COMPLETADA
-    );
-    return of(completadas).pipe(delay(200));
-  }
-
-  private getNextId(): number {
-    return Math.max(...this.reservas.map(r => r.id), 0) + 1;
+  // 🔹 Genera un nuevo ID secuencial (string)
+  private getNextId(): string {
+    if (this.reservas.length === 0) return '1';
+    const ids = this.reservas.map(r => parseInt(r.id, 10));
+    const nextId = Math.max(...ids) + 1;
+    return nextId.toString();
   }
 }
